@@ -213,11 +213,12 @@ Standalone mode: you can also unzip the file in public/assets/aistudio/ and open
 - Category coverage. The model is trained on Dairy, Fruits, Meat and Vegetables. Other categories use a neutral fallback, so their predictions are exploratory.
 - Expiry Risk is a proxy. It estimates the chance that stock is left at expiry, not exactly how much food will be thrown away.
   
-Roadmap
-[ ] Secure authentication and real staff invitations
-[ ] Shared cloud database with multi-device sync
-[ ] Supplier ordering and reorder suggestions
-[ ] Validation on real restaurant data
-[ ] Reports and CSV/PDF export
-[ ] Mobile-optimised staff view
-[ ] Support for more languages
+| Roadmap                                              |
+|------------------------------------------------------|
+| [ ] Secure authentication and real staff invitations |
+| [ ] Shared cloud database with multi-device sync     |
+| [ ] Supplier ordering and reorder suggestions        |
+| [ ] Validation on real restaurant data               |
+| [ ] Reports and CSV/PDF export                       |
+| [ ] Mobile-optimised staff view                      |
+| [ ] Support for more languages                       |
