@@ -56,6 +56,7 @@ Both roles see the same shared inventory and stock quantities. What differs is w
 On first launch the app asks you to choose a role from the Menu: Owner (full system access) or Staff (daily inventory operations).
 
 **Part 1 – Owner**
+
 The Owner workspace has full system access. The sidebar contains eight pages.
 
 1. Dashboard
@@ -143,6 +144,7 @@ d. Data & Privacy information.
 e. Reset Demo Data.
 
 **Part 2 – Staff**
+
 The Staff workspace is deliberately simple, so busy kitchen teams can record stock in a few taps. Staff only see the Inventory page.
 
 What staff can do
