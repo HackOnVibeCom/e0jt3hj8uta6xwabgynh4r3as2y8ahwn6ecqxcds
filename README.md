@@ -73,6 +73,7 @@ An inventory overview for the restaurant, showing the total number of items and 
 - Delete Item: long-press a card (or hover) to show the red × button, then confirm with Yes, Delete.
 
 Each item stores:
+
 i)   Item name, category, unit, supplier and optional image URL
 
 ii)  Current quantity and minimum stock level
