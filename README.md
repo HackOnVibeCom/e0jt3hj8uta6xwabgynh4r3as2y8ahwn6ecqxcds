@@ -59,6 +59,7 @@ On first launch the app asks you to choose a role from the Menu: Owner (full sys
 The Owner workspace has full system access. The sidebar contains eight pages.
 
 1. Dashboard
+
 An inventory overview for the restaurant, showing the total number of items and summary cards. Clicking a card jumps to the matching filtered view in Inventory.
 
 2. Inventory
@@ -85,7 +86,9 @@ iv)  Expiry date (optional, but required for AI prediction)
 v)   Expiry and waste tracking settings
 
 3. Item Details
+   
 Each item has a detail page with tabs:
+
 a. Details: category, unit, minimum stock, supplier, unit cost, expiry date and an inventory status bar.
 
 b. Stock In Records
@@ -99,12 +102,15 @@ e. Expiry & Waste: expiry information, waste records and tracking settings.
 Action buttons: + Stock In, − Stock Out, Update Expiry, + Record Waste.
 
 4. Low Stock Alerts
+   
 Lists every item at or below its minimum stock level, with current stock, minimum stock and status, so the owner knows what to reorder.
 
 5. Stock History
+   
 A complete, filterable log of all stock movement and adjustments. Filter by item, record type (Stock In, Stock Out, Stock Taking, Stock Adjustment, Expiry Update, Item Updated) and date range (from/to). Every record shows who made the change and when.
 
 6. Expiry & Waste
+
 i)   Summary cards: expiring soon, expired items, estimated expired stock value and recorded waste value.
 
 ii)  Expiry Records table showing each item, its stock, expiry date and status (Expired, Expiring Soon, Safe).
@@ -113,10 +119,11 @@ iii) Waste Records with reasons such as Spoiled, Expired, Spillage, Damaged, Ove
 
 iv)  Expiry Outcome History: confirm what actually happened to stock at expiry (for example remaining or discarded). These confirmed outcomes are what the AI learns from.
 
-8. AI Inventory Intelligence
+7. AI Inventory Intelligence
 See AI Inventory Intelligence below. Shows the model status, prediction data requirements and the expiry risk and predicted remaining stock for each item.
 
-9. Staff Management
+8. Staff Management
+
 - View all staff members with name, username, status and role.
   
 - Add Staff and Disable / Activate a staff member.
@@ -124,6 +131,7 @@ See AI Inventory Intelligence below. Shows the model status, prediction data req
 - This page is a demo: it manages sample staff records only. Real invitations, passwords and authentication need a secure backend.
   
 9. Settings
+
 a. Restaurant Settings: restaurant name and currency (RM, SGD, USD).
 
 b. Expiry & Waste Settings: the Expiring Soon threshold in days.
@@ -138,6 +146,7 @@ e. Reset Demo Data.
 The Staff workspace is deliberately simple, so busy kitchen teams can record stock in a few taps. Staff only see the Inventory page.
 
 What staff can do
+
 1. Browse inventory: search by name, filter by category, and use the status chips (All Items, Out of Stock, Low Stock, Expiring Soon).
 
 2. Open an item to see its current quantity, status, supplier, unit cost, minimum stock and expiry date.
@@ -155,6 +164,7 @@ What staff can do
 Every action is saved with the staff member's name and a timestamp, so the owner can audit it in Stock History.
 
 What staff cannot do
+
 1. Add, edit or delete items. The app shows Only Owner can edit item information or Only Owner can delete items.
 
 2. Open the Dashboard, Low Stock Alerts, Stock History, Expiry & Waste, AI Inventory Intelligence, Staff Management or Settings.
@@ -162,9 +172,11 @@ What staff cannot do
 3. Export ML data. The app shows Only Owner can export ML data.
 
 **Tip for good AI predictions**
+
 Mark stock-outs that are normal kitchen usage as Kitchen usage. The AI needs at least 3 of these per item before it shows a prediction.
 
 **AI Inventory Intelligence**
+
 StockPilot embeds two Random Forest models that run locally in the browser:
 
 | Model                     | Type                   | Trees | Purpose                                              |
@@ -173,6 +185,7 @@ StockPilot embeds two Random Forest models that run locally in the browser:
 | Predicted Remaining Stock | RandomForestRegressor  | 350   | Expected quantity left at expiry                     |
 
 **When a prediction appears**
+
 - The item has a future expiry date and expiry tracking is on.
   
 - The item has at least 3 stock-outs marked as Kitchen usage. Below this, the app shows an insufficient data status instead of a fake number.
@@ -180,6 +193,7 @@ StockPilot embeds two Random Forest models that run locally in the browser:
 - Predictions refresh automatically after each stock action: Stock In, Stock Out, Stock Taking, Stock Adjustment, Waste, item edit or tracking change.
 
 **Automatic on-device retraining (V10)**
+
 - Triggered when a new confirmed expiry outcome is recorded, and checked again when AI Inventory Intelligence is opened.
   
 - Needs at least 12 item/expiry cohorts, with at least 3 examples in each class.
@@ -194,6 +208,7 @@ StockPilot embeds two Random Forest models that run locally in the browser:
 The shipped models were trained on 2,280 synthetic scenarios. On the synthetic hold-out set (480 scenarios), the classifier reached F1 0.903 / ROC-AUC 0.971 and the regressor MAE 0.692 / R² 0.844. These figures are not real restaurant accuracy. Real validation needs confirmed usage, waste and expiry outcomes from real kitchens.
 
 **Tech Stack**
+
 - Frontend: React 19, Vite, TypeScript, Tailwind CSS, Lucide icons, Motion
   
 - App core: a self-contained HTML/JavaScript application at public/stockpilot/index.html, loaded inside the React shell via an iframe
@@ -205,6 +220,7 @@ The shipped models were trained on 2,280 synthetic scenarios. On the synthetic h
 - Built with: Google AI Studio
   
 **Project Structure**
+
 stockpilot-ai-f-b-inventory/
 ├── index.html                 # Vite entry page
 ├── metadata.json              # App name and description
@@ -241,6 +257,7 @@ Standalone mode: you can also unzip the file in public/assets/aistudio/ and open
 | The GEMINI_API_KEY entry in .env.example comes from the AI Studio template. The StockPilot app itself does not need it, because its AI runs locally.
 
 **Data Storage & Privacy**
+
 - All inventory data and the trained model are stored in your own browser's localStorage.
   
 - No data is sent to a server, and no ML API key is needed.
@@ -250,6 +267,7 @@ Standalone mode: you can also unzip the file in public/assets/aistudio/ and open
 - The export separates Synthetic / Demo records (syntheticDemoDataset) from User / Operational records (operationalDataset).
 
 **Limitations**
+
 - Prototype, not production. There is no shared cloud database, so staff on different devices do not see the same stock.
   
 - Role selection is a demo. There is no real login or authentication, and the Staff Management page manages sample records only.
