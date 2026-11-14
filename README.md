@@ -137,9 +137,10 @@ Mark stock-outs that are normal kitchen usage as Kitchen usage. The AI needs at 
 **AI Inventory Intelligence**
 StockPilot embeds two Random Forest models that run locally in the browser:
 
-Model	                     |           Type	         | Trees |                         Purpose
-Expiry Risk Classifier     | RandomForestClassifier	 |  150	 | Probability that stock is still left when it expires
-Predicted Remaining Stock	 | RandomForestRegressor	 |  350	 | Expected quantity left at expiry
+| Model                     | Type                   | Trees | Purpose                                              |
+|---------------------------|------------------------|-------|------------------------------------------------------|
+| Expiry Risk Classifier    | RandomForestClassifier | 150   | Probability that stock is still left when it expires |
+| Predicted Remaining Stock | RandomForestRegressor  | 350   | Expected quantity left at expiry                     |
 
 **When a prediction appears**
 - The item has a future expiry date and expiry tracking is on.
