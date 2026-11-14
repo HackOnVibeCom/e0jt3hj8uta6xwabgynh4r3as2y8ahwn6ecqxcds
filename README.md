@@ -21,12 +21,13 @@ The AI runs entirely in the browser. There is no server, no API key and no inter
 12. Roadmap
 
 **Overview**                                                                                                                                
+|                |                                                                                                                                          |
 |----------------|------------------------------------------------------------------------------------------------------------------------------------------|
 | Problem        | F&B businesses lose money through spoiled ingredients, over-ordering and manual stock logs.                                              |
 | Solution       | One shared inventory with two roles (Owner and Staff), full activity logs, expiry/waste tracking and local machine-learning predictions. |
 | Target users   | Owners, managers and kitchen staff of restaurants, cafés, bakeries and food stalls.                                                      |
 | Target markets | Malaysia (RM) and Singapore (SGD) first, with USD support for wider markets.                                                             |
-| Currencies     | RM, SGD, USD   
+| Currencies     | RM, SGD, USD         
 
 **Roles at a Glance**
 Both roles see the same shared inventory and stock quantities. What differs is what each role can manage.
