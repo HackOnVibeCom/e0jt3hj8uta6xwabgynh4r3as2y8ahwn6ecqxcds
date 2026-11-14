@@ -20,35 +20,37 @@ The AI runs entirely in the browser. There is no server, no API key and no inter
 10. Limitations
 12. Roadmap
 
-**Overview**
-Problem	       | F&B businesses lose money through spoiled ingredients, over-ordering and manual stock logs.
-Solution       | One shared inventory with two roles (Owner and Staff), full activity logs, expiry/waste tracking and local machine-learning predictions.
-Target users   | Owners, managers and kitchen staff of restaurants, cafés, bakeries and food stalls.
-Target markets | Malaysia (RM) and Singapore (SGD) first, with USD support for wider markets.
-Currencies	   | RM, SGD, USD
+**Overview**                                                                                                                                
+|----------------|------------------------------------------------------------------------------------------------------------------------------------------|
+| Problem        | F&B businesses lose money through spoiled ingredients, over-ordering and manual stock logs.                                              |
+| Solution       | One shared inventory with two roles (Owner and Staff), full activity logs, expiry/waste tracking and local machine-learning predictions. |
+| Target users   | Owners, managers and kitchen staff of restaurants, cafés, bakeries and food stalls.                                                      |
+| Target markets | Malaysia (RM) and Singapore (SGD) first, with USD support for wider markets.                                                             |
+| Currencies     | RM, SGD, USD   
 
 **Roles at a Glance**
 Both roles see the same shared inventory and stock quantities. What differs is what each role can manage.
 
-**Feature**	                                                           **Owner**	**Staff**
-View inventory (search, category filter, status filter)	                  ✅	       ✅
-Open item details and records	                                            ✅   	     ✅
-Stock In	                                                                ✅         ✅
-Stock Out                                                                	✅       	 ✅
-Update expiry date	                                                      ✅	       ✅
-Record waste	                                                            ✅	       ✅
-Add item	                                                                ✅	       ❌
-Edit item information	                                                    ✅	       ❌
-Delete item	                                                              ✅	       ❌
-Dashboard	                                                                ✅	       ❌
-Low Stock Alerts	                                                        ✅         ❌
-Stock History (all movements)	                                            ✅         ❌
-Expiry & Waste overview	                                                  ✅	       ❌
-AI Inventory Intelligence	                                                ✅	       ❌
-Staff Management	                                                        ✅	       ❌
-Settings (restaurant, currency, tracking)	                                ✅	       ❌
-Export ML data (JSON)	                                                    ✅	       ❌
-Reset demo data	                                                          ✅	       ❌
+| Feature                                                     | Owner  | Staff   |
+|-------------------------------------------------------------|--------|---------|
+| View inventory (search, category filter, status filter)     | ✅     | ✅     |
+| Open item details and records                               | ✅     | ✅     |
+| Stock In                                                    | ✅     | ✅     |
+| Stock Out                                                   | ✅     | ✅     |
+| Update expiry date                                          | ✅     | ✅     |
+| Record waste                                                | ✅     | ✅     |
+| Add item                                                    | ✅     | ❌     |
+| Edit item information                                       | ✅     | ❌     |
+| Delete item                                                 | ✅     | ❌     |
+| Dashboard                                                   | ✅     | ❌     |
+| Low Stock Alerts                                            | ✅     | ❌     |
+| Stock History (all movements)                               | ✅     | ❌     |
+| Expiry & Waste overview                                     | ✅     | ❌     |
+| AI Inventory Intelligence                                   | ✅     | ❌     |
+| Staff Management                                            | ✅     | ❌     |
+| Settings (restaurant, currency, tracking)	                  | ✅     | ❌     |
+| Export ML data (JSON)                                       | ✅     | ❌     |
+| Reset demo data                                             | ✅     | ❌     |
 
 On first launch the app asks you to choose a role from the Menu: Owner (full system access) or Staff (daily inventory operations).
 
