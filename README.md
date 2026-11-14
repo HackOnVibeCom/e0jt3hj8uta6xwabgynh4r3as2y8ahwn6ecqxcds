@@ -63,24 +63,36 @@ An inventory overview for the restaurant, showing the total number of items and 
 
 2. Inventory
 - Visual grid of all items with photos.
+  
 - Search by item name, filter by category, and quick status chips: All Items, Out of Stock, Low Stock, Expiring Soon.
+  
 - Add Item button to create new ingredients.
-- Edit Item inside each item page.
+  
+- Edit Item inside each item page。
+  
 - Delete Item: long-press a card (or hover) to show the red × button, then confirm with Yes, Delete.
 
 Each item stores:
 i)   Item name, category, unit, supplier and optional image URL
+
 ii)  Current quantity and minimum stock level
+
 iii) Unit cost
+
 iv)  Expiry date (optional, but required for AI prediction)
+
 v)   Expiry and waste tracking settings
 
 3. Item Details
 Each item has a detail page with tabs:
 a. Details: category, unit, minimum stock, supplier, unit cost, expiry date and an inventory status bar.
+
 b. Stock In Records
+
 c. Stock Out Records
+
 d. Stock Adjustment Records (stock taking and adjustments)
+
 e. Expiry & Waste: expiry information, waste records and tracking settings.
 
 Action buttons: + Stock In, − Stock Out, Update Expiry, + Record Waste.
@@ -93,23 +105,32 @@ A complete, filterable log of all stock movement and adjustments. Filter by item
 
 6. Expiry & Waste
 i)   Summary cards: expiring soon, expired items, estimated expired stock value and recorded waste value.
+
 ii)  Expiry Records table showing each item, its stock, expiry date and status (Expired, Expiring Soon, Safe).
+
 iii) Waste Records with reasons such as Spoiled, Expired, Spillage, Damaged, Over-prepared and Other.
+
 iv)  Expiry Outcome History: confirm what actually happened to stock at expiry (for example remaining or discarded). These confirmed outcomes are what the AI learns from.
 
-7. AI Inventory Intelligence
+8. AI Inventory Intelligence
 See AI Inventory Intelligence below. Shows the model status, prediction data requirements and the expiry risk and predicted remaining stock for each item.
 
-8. Staff Management
+9. Staff Management
 - View all staff members with name, username, status and role.
+  
 - Add Staff and Disable / Activate a staff member.
+  
 - This page is a demo: it manages sample staff records only. Real invitations, passwords and authentication need a secure backend.
   
 9. Settings
 a. Restaurant Settings: restaurant name and currency (RM, SGD, USD).
+
 b. Expiry & Waste Settings: the Expiring Soon threshold in days.
+
 c. ML Data Collection: counts for the Synthetic / Demo dataset and the User / Operational dataset, plus Export ML Data (JSON).
+
 d. Data & Privacy information.
+
 e. Reset Demo Data.
 
 **Part 2 – Staff**
@@ -117,18 +138,26 @@ The Staff workspace is deliberately simple, so busy kitchen teams can record sto
 
 What staff can do
 1. Browse inventory: search by name, filter by category, and use the status chips (All Items, Out of Stock, Low Stock, Expiring Soon).
+
 2. Open an item to see its current quantity, status, supplier, unit cost, minimum stock and expiry date.
+
 3. Stock In: record a purchase or delivery with quantity, date, reason (for example Purchase / Received) and optional notes.
+
 4. Stock Out: record usage with a reason such as Kitchen usage, Transfer or Supplier return.
+
 5. Update Expiry: set or change an item's expiry date.
+
 6. Record Waste: log discarded stock with quantity and a required waste reason (when waste tracking is enabled for that item).
+
 7. See a confirmation message after each action, for example Stock In recorded successfully.
 
 Every action is saved with the staff member's name and a timestamp, so the owner can audit it in Stock History.
 
 What staff cannot do
 1. Add, edit or delete items. The app shows Only Owner can edit item information or Only Owner can delete items.
+
 2. Open the Dashboard, Low Stock Alerts, Stock History, Expiry & Waste, AI Inventory Intelligence, Staff Management or Settings.
+
 3. Export ML data. The app shows Only Owner can export ML data.
 
 **Tip for good AI predictions**
@@ -144,14 +173,20 @@ StockPilot embeds two Random Forest models that run locally in the browser:
 
 **When a prediction appears**
 - The item has a future expiry date and expiry tracking is on.
+  
 - The item has at least 3 stock-outs marked as Kitchen usage. Below this, the app shows an insufficient data status instead of a fake number.
+  
 - Predictions refresh automatically after each stock action: Stock In, Stock Out, Stock Taking, Stock Adjustment, Waste, item edit or tracking change.
 
 **Automatic on-device retraining (V10)**
 - Triggered when a new confirmed expiry outcome is recorded, and checked again when AI Inventory Intelligence is opened.
+  
 - Needs at least 12 item/expiry cohorts, with at least 3 examples in each class.
+  
 - A candidate model replaces the current one only if it validates better on a held-out set (better Brier score without a worse F1 for the classifier, lower MAE for the regressor). Otherwise the previous model is kept.
+  
 - Labels come only from observed expiry outcomes. Model predictions are never used as training labels.
+  
 - The accepted model is saved in the browser's localStorage.
 
 **Honest accuracy note**
@@ -159,9 +194,13 @@ The shipped models were trained on 2,280 synthetic scenarios. On the synthetic h
 
 **Tech Stack**
 - Frontend: React 19, Vite, TypeScript, Tailwind CSS, Lucide icons, Motion
+  
 - App core: a self-contained HTML/JavaScript application at public/stockpilot/index.html, loaded inside the React shell via an iframe
+  
 - ML: Random Forest models converted to JavaScript data, with browser-native CART + bootstrap Random Forest training for retraining
+  
 - Storage: browser localStorage
+  
 - Built with: Google AI Studio
   
 **Project Structure**
@@ -202,15 +241,22 @@ Standalone mode: you can also unzip the file in public/assets/aistudio/ and open
 
 **Data Storage & Privacy**
 - All inventory data and the trained model are stored in your own browser's localStorage.
+  
 - No data is sent to a server, and no ML API key is needed.
+  
 - Data is not shared between devices or users. Clearing browser site data can delete your records, so use Export ML Data (JSON) to back up.
+  
 - The export separates Synthetic / Demo records (syntheticDemoDataset) from User / Operational records (operationalDataset).
 
 **Limitations**
 - Prototype, not production. There is no shared cloud database, so staff on different devices do not see the same stock.
+  
 - Role selection is a demo. There is no real login or authentication, and the Staff Management page manages sample records only.
+  
 - Synthetic training data. Accuracy on real restaurants has not been validated.
+  
 - Category coverage. The model is trained on Dairy, Fruits, Meat and Vegetables. Other categories use a neutral fallback, so their predictions are exploratory.
+  
 - Expiry Risk is a proxy. It estimates the chance that stock is left at expiry, not exactly how much food will be thrown away.
   
 | Roadmap                                              |
