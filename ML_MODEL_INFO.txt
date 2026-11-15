@@ -1,0 +1,54 @@
+StockPilot Local ML Model Info — Version 2.0
+
+Deployment models
+- Expiry Risk Classifier: RandomForestClassifier, 150 trees, max_depth=8.
+- Predicted Remaining Stock: RandomForestRegressor, 350 trees, max_depth=10.
+- Feature schemas and local browser inference contract are unchanged.
+- UI and existing features are unchanged.
+
+Training/validation basis
+- Training data: 2,280 synthetic scenarios generated from 16 supported-category Demo catalogue items plus 3 explicitly synthetic Fruits category archetypes (the supplied Demo catalogue contained no Fruits items).
+- Holdout: 480 scenarios from four held-out item/archetype groups, one per supported category.
+- Group split prevents the same demo item template from appearing in both training and test sets.
+- Synthetic labels were generated using an explicit scenario simulator; they are not observed restaurant outcomes.
+- Selected hyperparameters using 3-fold GroupKFold cross-validation on the training groups.
+- Final deployment models were refit on all generated synthetic scenarios after the holdout comparison.
+
+Holdout metrics (synthetic only; not a real-world accuracy claim)
+Expiry Risk Classifier:
+  Legacy F1: 0.5843 | New F1: 0.9027
+  Legacy ROC-AUC: 0.8240 | New ROC-AUC: 0.9714
+  Legacy Brier: 0.1953 | New Brier: 0.0808
+Predicted Remaining Stock:
+  Legacy MAE: 1.4497 | New MAE: 0.6922
+  Legacy RMSE: 1.9260 | New RMSE: 1.1582
+  Legacy R2: 0.5698 | New R2: 0.8444
+
+Important limitation
+These results show improvement only against the synthetic scenario generator used in this project. They do not establish real restaurant accuracy. Real operational validation still requires confirmed inventory usage, waste, and expiry outcomes.
+
+
+V9 competition demo data collection
+- Seeded/demo item events are no longer discarded by the ML data export.
+- Settings reports Synthetic/Demo and User/Operational collections separately.
+- Export schema 1.2 writes demo records under syntheticDemoDataset and user-created records under operationalDataset.
+- supervisedTrainingExamples are formed only by joining a successful prediction-time feature snapshot with an observed expiry outcome for the same itemId and expiryDate. Model predictions are never training labels.
+- Synthetic/demo examples carry isSynthetic=true and must not be presented as real restaurant evidence.
+- Exporting data does not retrain the embedded browser model.
+
+
+V10 on-device automatic Random Forest retraining
+- Added browser-native CART + bootstrap Random Forest training for classifier and regressor.
+- Triggered by a newly confirmed expiry outcome, and checked again when AI Inventory Intelligence is opened.
+- A training cohort is one unique itemId + expiryDate, represented by the latest prediction-time feature snapshot before expiry.
+- Supervised targets come only from observed expiry outcomes. Class target: remainingAtExpiry > 0. Regression target: remainingAtExpiry / prediction-time currentStock, restricted to valid 0..1 ratios.
+- Requires at least 12 eligible item/expiry cohorts and at least 3 examples in each classifier class.
+- Uses stratified held-out validation. Classifier replacement requires improved Brier score without F1 degradation beyond tolerance; regressor replacement requires lower held-out MAE.
+- Model components that fail validation retain the previous model. Accepted model is saved in browser localStorage and used by subsequent predictions.
+- Model retraining is local to this browser; no cross-device sync is provided.
+
+
+V15 competition demo data note
+- The shipped competition workspace seeds eight demo items, a four-week stock movement ledger, waste entries, and eighteen explicitly synthetic historical item/expiry cohorts plus one current Tomato expiry cohort with a matching pre-expiry prediction snapshot and expired-waste record. Six zero-remaining cohorts remain in the internal ML dataset as negative-class examples; the visible outcome history omits synthetic zero-remaining/zero-discard rows, and six additional non-zero positive-outcome cohorts provide useful numeric demo history. The current Tomato expiry example is also synthetic, with 3 kg reconstructed at expiry, 1 kg recorded as expired waste, and 2 kg remaining in current stock.
+- These fixtures exercise the local prediction and auto-retraining workflow; they are synthetic and do not establish real restaurant model accuracy.
+- Demo rows are marked isDemoSample=true and the settings page separates them from user-created operational records.
